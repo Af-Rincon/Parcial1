@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div class="row">
+        <div class="title" id = "titulo">
+            Restaurant & Lounge
+            <img src="carro.png" alt="carro" width=80  height=80 align=right> 
+        </div>
+        <hr width=100%>
+    <div>
+
+        <div>
+            <img src="hamburguesa.png" alt ="hamburguesa" width=100% height=300>
+        </div>
+        <hr width=100%>
+        <div>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                  
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                      <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Burgers</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Tacos</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Salads</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Deserts</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Drinks&Sides</a>
+                      </li>
+                      
+                    </ul>
+                </div>
+            </div>
+          </nav>
+        </div>
+        <hr width=100%>
+
+        <div class="card" id ="carta"  style="width: 18rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        
+        <hr width=100%>
+
+        <script>
+            const url = 'https://gist.githubusercontent.com/josejbocanegra/9a28c356416badb8f9173daf36d1460b/raw/5ea84b9d43ff494fcbf5c5186544a18b42812f09/restaurant.json';
+
+            fetch(url)
+            .then(res => res.json())
+            .then(data =>{
+
+            console.log(data)
+
+            //menu(data) 
+          } 
+          )
+
+          function menu(data){
+
+const carta = document.getElementById("carta")
+
+let burgers = data[0]
+
+for(let i = 0;i<burgers.length;i++){
+
+
+    
+
+let img = document.createElement("img")
+let div = document.createElement("div")
+let h5 = document.createElement("h5")
+let p = document.createElement("p")
+//let p2 = dcoument.createElement("p")
+let a = document.createElement("a")
+
+
+/*img.className("card-img-top")
+div.className("card-body")
+h5.className("card-title")
+p.className("card-text")
+a.href("#")
+a.className("btn btn-primary")*/
+
+
+
+let name = document.createTextNode(burgers[i].name)
+let description = document.createTextNode(burgers[i].description)
+let image = document.createTextNode(burgers[i].image)
+let price = document.createTextNode(burgers[i].price)
+let button = document.createTextNode("Add to Car")
+
+//img.src(image)
+
+h5.appendChild(name)
+p.appendChild(description)
+//p2.appendChild(price)
+
+div.appendChild(img)
+div.appendChild(h5)
+div.appendChild(p)
+//div.appendChild(h3)
+div.appendChild(a)
+
+carta.appendChild(div)
+}
+
+}
+
+          
+        </script>
+
+
+
+</body>
+</html>
