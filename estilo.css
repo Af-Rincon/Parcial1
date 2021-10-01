@@ -1,5 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Satisfy&display=swap");
+
 #titulo{
 
     font-family: 'Satisfy', cursive;
+    
+    
+}
+
+#items{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     
 }

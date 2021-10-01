@@ -5,14 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+    crossorigin="anonymous"
+  />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    
+    <link rel="stylesheet" href="estilo.css"/>
     <title>Document</title>
 </head>
 <body>
-    
-    <div class="row">
-        <div class="title" id = "titulo">
-            Restaurant & Lounge
-            <img src="carro.png" alt="carro" width=80  height=80 align=right> 
+   
+    <div>
+        <div class = "row">
+            <h1 id = "titulo" class="col-10">Restaurant & Lounge</h1>
+            <div class="col"><input id="car" type="image" src="carro.png" height=70/></div>
+            <h4 class="col" id="items">0 Items</h4>
         </div>
         <hr width=100%>
     <div>
@@ -22,25 +34,25 @@
         </div>
         <hr width=100%>
         <div>
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div class="container-fluid">
                   
                   <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                       <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Burgers</a>
+                        <a class="nav-link active" aria-current="page" href="#" id="burger">Burgers</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Tacos</a>
+                        <a class="nav-link active" aria-current="page" href="#" id="taco">Tacos</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Salads</a>
+                        <a class="nav-link active" aria-current="page" href="#" id = "salad">Salads</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Deserts</a>
+                        <a class="nav-link active" aria-current="page" href="#" id="desert">Deserts</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Drinks&Sides</a>
+                        <a class="nav-link active" aria-current="page" href="#" id="drink">Drinks&Sides</a>
                       </li>
                       
                     </ul>
@@ -50,78 +62,416 @@
         </div>
         <hr width=100%>
 
-        <div class="card" id ="carta"  style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
+        <div id="opcion">
+
+
+        </div>
+
+        <hr width=100%>
+
+        <div class="row" id ="carta">
+            
+
+        </div>
+
+        <div>
+
+          <table class="table table-striped" id="compras">
+            
+          </table>
+
+          <div class = "row" id = "cuenta">
+
           </div>
+          
+
+        </div>
+
+       <div id="cancelado">
+
+
+       </div>
+
+       
+       <div id= "exampleModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Cancel the Order</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>Are you sure about cancelling the order?</p>
+                </div>
+                <div class="modal-footer">
+                  <button id="yes"type="button" class="btn btn-primary">Yes, I want to cancel the order</button>
+                  <button id = "no" type="button" class="btn btn-secondary" data-dismiss="modal">No, I want to continue adding products</button>
+                </div>
+              </div>
+            </div>
+          </div>   
         
         <hr width=100%>
 
-        <script>
-            const url = 'https://gist.githubusercontent.com/josejbocanegra/9a28c356416badb8f9173daf36d1460b/raw/5ea84b9d43ff494fcbf5c5186544a18b42812f09/restaurant.json';
+    
 
-            fetch(url)
+    <script>
+        const url = 'https://gist.githubusercontent.com/josejbocanegra/9a28c356416badb8f9173daf36d1460b/raw/5ea84b9d43ff494fcbf5c5186544a18b42812f09/restaurant.json';
+
+        let items = []
+
+        let lacuentaporfis = []
+
+         fetch(url)
             .then(res => res.json())
             .then(data =>{
 
-            console.log(data)
 
-            //menu(data) 
-          } 
-          )
+            burger.onclick = ()=>{
 
-          function menu(data){
+            let burgers = data[0].products
+            let alimento = data[0].name
+            opcion(alimento)
+            menu(burgers)   
+            }
 
-const carta = document.getElementById("carta")
+            taco.onclick = ()=>{
 
-let burgers = data[0]
+            let burgers = data[1].products
+            let alimento = data[1].name
+            opcion(alimento)
+            menu(burgers)
+            }
 
-for(let i = 0;i<burgers.length;i++){
+            salad.onclick = ()=>{
+
+            let burgers = data[2].products
+            let alimento = data[2].name
+            opcion(alimento)
+            menu(burgers)
+            }
+
+            desert.onclick = ()=>{
+
+            let burgers = data[3].products
+            let alimento = data[3].name
+            opcion(alimento)
+            menu(burgers)
+            }
+
+            drink.onclick = ()=>{
+
+            let burgers = data[4].products
+            let alimento = data[4].name
+            opcion(alimento)
+            menu(burgers)
+            }
+
+            car.onclick = ()=>{
+
+              compras(items) 
+              opcion("Order Detail")          
+            }
+
+            
+          }  
+        )
+
+        function compras(items){
+          const recibo = document.getElementById("compras")
+          const cuentas = document.getElementById("cuenta")
+          
+            while(carta.firstChild){
+                carta.removeChild(carta.firstChild)
+            }
+            while(recibo.firstChild){
+                recibo.removeChild(recibo.firstChild)
+            }
+            while(cuentas.firstChild){
+                cuentas.removeChild(cuentas.firstChild)
+            }
+
+            let thead = document.createElement("thead")
+            let tr1 = document.createElement("tr")
+            let itm = document.createElement("th")
+            let qty = document.createElement("th")
+            let desc = document.createElement("th")
+            let price = document.createElement("th")
+            let amount = document.createElement("th")
+            let mod = document.createElement("th")
+
+            let tbody = document.createElement("tbody")
+
+            itm.scope = "col"
+            itm.innerText = "Item"
+            qty.scope = "col"
+            qty.innerText = "Qty."
+            desc.scope = "col"
+            desc.innerText = "Description"
+            price.scope = "col"
+            price.innerText = "Unit Price"
+            amount.scope = "col"
+            amount.innerText = "Amount"
+            mod.scope = "col"
+            mod.innerText = "Modify"
+
+            tr1.appendChild(itm)
+            tr1.appendChild(qty)
+            tr1.appendChild(desc)
+            tr1.appendChild(price)
+            tr1.appendChild(amount)
+            tr1.appendChild(mod)
+            thead.appendChild(tr1)
+            recibo.appendChild(thead)
 
 
-    
+            let unicos = new Set(items)
 
-let img = document.createElement("img")
-let div = document.createElement("div")
-let h5 = document.createElement("h5")
-let p = document.createElement("p")
-//let p2 = dcoument.createElement("p")
-let a = document.createElement("a")
+            cost = 0
+            
+          for(let i =0;i<unicos.size;i++)
+          {
+ 
+            
+            let tr2 = document.createElement("tr")  
+
+            let id = document.createElement("th")
+
+            let td2 = document.createElement("td")
+            let td3 = document.createElement("td")   
+            let td4 = document.createElement("td")
+            let td5 = document.createElement("td")
+            let btns = document.createElement("div")
+            let up = document.createElement("button")
+            let down = document.createElement("button")
+
+            let actual = []
+
+            let contador = 0
+            
+            unicos.forEach(element => {
+
+              actual.push(element)
+            });
+
+            
+
+            for(let j=0;j<items.length;j++)
+            {
+              if(items[j].name===actual[i].name)
+              {
+                contador++
+              }
+            }
+
+            cost += actual[i].price*contador 
+
+            id.textContent = i+1
+            td2.textContent = contador
+            td3.textContent = actual[i].description
+            td4.textContent = "$"+actual[i].price
+            td5.textContent = "$"+actual[i].price*contador
+
+            let producto = {item:(i+1),quantity:contador,description:actual[i].description,unitprice:actual[i].price}
+
+            lacuentaporfis.push(producto)
+        
+            up.type = "button"
+            up.className = "btn btn-dark active"
+            up.innerText = "+"
+            up.style = "margin:2px"
+            down.type = "button"
+            down.className = "btn btn-dark active"
+            down.style = "margin:2px"
+            down.innerText = "-"
+
+            up.onclick = ()=>{
+
+              items.push(actual[i])
+              lacuentaporfis = []
+
+              let comprados = document.getElementById("items")
+                comprados.innerText =items.length+" items"
+              compras(items) 
+              
+
+            }
+
+            down.onclick = ()=>{
+              lacuentaporfis = []
+            items.pop(actual[i])
+            let comprados = document.getElementById("items")
+                comprados.innerText =items.length+" items"
+            compras(items) 
+
+            }
+
+            tr2.appendChild(id)
+            tr2.appendChild(td2)
+            tr2.appendChild(td3)
+            tr2.appendChild(td4)
+            tr2.appendChild(td5)
+            tr2.appendChild(up)
+            tr2.appendChild(down)
+
+            tbody.appendChild(tr2)
+            
+            
+          }
+
+          let total = document.createElement("p")
+          let cancel = document.createElement("button")
+          let confirm = document.createElement("button")
+          let div1 = document.createElement("div")
+          let div2 = document.createElement("div")
+
+          div1.className = "col-6"
+          div2.className = "col-6"
+
+          cancel.type="button"
+          cancel.className = "btn btn-danger active"
+          cancel.innerText = "Cancel"
+          cancel.setAttribute("data-toggle","modal")
+          cancel.setAttribute("data-target","#exampleModal")
+
+          let yes = document.getElementById("yes")
+          let no = document.getElementById("no")
+          
+          yes.onclick=()=>{
+
+            items = []
+            lacuentaporfis = []
+            let comprados = document.getElementById("items")
+                comprados.innerText =items.length+" items"
+            compras(items) 
+
+            while(recibo.firstChild){
+                recibo.removeChild(recibo.firstChild)
+            }
+
+          }
+        
+ 
+          confirm.type="button"
+          confirm.className = "btn btn-light active"
+          confirm.innerText = "Confirm Order"
+
+          
+          confirm.onclick = ()=>{
+
+              console.log(lacuentaporfis)
+              items = []
+              lacuentaporfis = []
+              
+              let comprados = document.getElementById("items")
+                comprados.innerText =items.length+" items"
+                console.log(lacuentaporfis.length)
+                console.log(items.length)
+              compras(items)
+          }
+
+          total.textContent += "Total: $"+cost
+
+          div1.appendChild(total)
+          div2.appendChild(cancel)
+          div2.appendChild(confirm)
+
+          recibo.appendChild(tbody)
+
+          cuentas.appendChild(div1)
+          cuentas.appendChild(div2)
+
+        }
+
+       
+       
+        function opcion(alimento)
+        {
+            const nombre = document.getElementById("opcion")
+            while(nombre.firstChild){
+                nombre.removeChild(nombre.firstChild)
+            }
+
+            let h1 = document.createElement("h1")
+            h1.innerText = alimento
+            h1.className= "text-center"
+            nombre.appendChild(h1)
+        }
 
 
-/*img.className("card-img-top")
-div.className("card-body")
-h5.className("card-title")
-p.className("card-text")
-a.href("#")
-a.className("btn btn-primary")*/
+        function menu(burgers){
+
+            const carta = document.getElementById("carta")
+
+            while(carta.firstChild){
+                carta.removeChild(carta.firstChild)
+            }
 
 
+            for(let i = 0;i<burgers.length;i++){
 
-let name = document.createTextNode(burgers[i].name)
-let description = document.createTextNode(burgers[i].description)
-let image = document.createTextNode(burgers[i].image)
-let price = document.createTextNode(burgers[i].price)
-let button = document.createTextNode("Add to Car")
+            let div1 = document.createElement("div");
 
-//img.src(image)
+            div1.className = "card"
+            div1.style="width: 18rem;"
+                
 
-h5.appendChild(name)
-p.appendChild(description)
-//p2.appendChild(price)
+            let img = document.createElement("img")
+            let div = document.createElement("div")
+            let h5 = document.createElement("h5")
+            let p = document.createElement("p")
+            let b = document.createElement("b")
+            let p2 = document.createElement("p")
+            let a = document.createElement("a")
+            
 
-div.appendChild(img)
-div.appendChild(h5)
-div.appendChild(p)
-//div.appendChild(h3)
-div.appendChild(a)
 
-carta.appendChild(div)
-}
+            img.className= "card-img-top"
+            div.className= "card-body"
+            h5.className="card-title"
+            p.className="card-text"
+            a.href="#"
+            a.className="btn btn-primary"
+
+            a.onclick = ()=>{
+
+                items.push(burgers[i])
+                //lacuentaporfis = []
+                console.log(items.length)
+                let comprados = document.getElementById("items")
+                comprados.innerText =items.length+" items"
+
+
+            }
+
+
+            let name = document.createTextNode(burgers[i].name)
+            let description = document.createTextNode(burgers[i].description)
+
+            let price = document.createTextNode("$"+burgers[i].price)
+            let button = document.createTextNode("Add to Car")
+
+            img.src=burgers[i].image
+
+            h5.appendChild(name)
+            p.appendChild(description)
+            b.appendChild(price)
+            p2.appendChild(b)
+            a.appendChild(button)
+
+            div.appendChild(img)
+            div.appendChild(h5)
+            div.appendChild(p)
+            div.appendChild(p2)
+            div.appendChild(a)
+
+            div1.appendChild(div)
+
+            carta.appendChild(div1)
+
+        }
 
 }
 
